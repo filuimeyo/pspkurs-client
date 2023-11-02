@@ -4,8 +4,8 @@ import {Navbar} from './Navbar'
 export const Layout = ({children}) => {
   return (
     <React.Fragment>
+      <Navbar />
       <div className='app'>
-        <Navbar />
         {children}
       </div>
     </React.Fragment>

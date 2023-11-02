@@ -54,9 +54,9 @@ export const SubjectsPage = () => {
 
 					
                     {
-                        subjects.map((subject) => (
+                        subjects.map(subject => (
                           // <div>{subject[0].name}</div>
-                           <SubjectCard subject={subject} />
+                           <SubjectCard key={subject[0].id} subject={subject} />
                         ))
                     }
                 </div>

@@ -42,7 +42,7 @@ export const TeachersPage = () => {
                     {
                         teachers.map((teacher) => (
                           // <div>{subject[0].name}</div>
-                           <TeacherCard teacher={teacher} />
+                           <TeacherCard key={teacher.id} teacher={teacher} />
                         ))
                     }
                 </div>
