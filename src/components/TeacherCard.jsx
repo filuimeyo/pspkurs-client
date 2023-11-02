@@ -12,7 +12,7 @@ export const TeacherCard = ({teacher}) => {
 
         <div>
             <img
-                src = {teacher.fileName = null ? `` : `https://via.placeholder.com/300` }
+                src={teacher.fileName != null ? "http://localhost:8080/api/v1/registration/teacher/profileimage/file/"+teacher.fileName : "https://via.placeholder.com/300"}
                 alt='teacher '
             ></img>
         </div>
@@ -34,7 +34,7 @@ export const TeacherCard = ({teacher}) => {
 
         <div>
             <h2>{teacher.firstName}</h2>
-            <p>тут будет досаточно длинное описание тут будет досаточно длинное описание тут будет досаточно длинное описание тут будет досаточно длинное описание тут будет досаточно длинное описание</p>
+            <p>{teacher.info}</p>
             <h4>Стоимость занятий: {teacher.lessonPrice} бун</h4>
 
             {
