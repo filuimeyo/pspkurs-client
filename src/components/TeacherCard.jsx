@@ -6,6 +6,23 @@ import FilledHeart from "../filledheart.svg"
 export const TeacherCard = ({teacher}) => {
 
     const [liked, setLiked] = React.useState(false);
+
+    let rating;
+    if(teacher.finalRating !== 0.0){
+        rating = 
+
+            <div>
+                
+                {teacher.finalRating.toFixed(2)}
+
+                <img
+                    src={Star}
+                    alt='stars'
+                ></img>
+
+            </div>
+        
+    }
    
   return (
     <div className='teacher'>
@@ -47,16 +64,7 @@ export const TeacherCard = ({teacher}) => {
          
         </div>
 
-        <div>
-            
-            {teacher.finalRating.toFixed(2)}
-          
-            <img
-                src={Star}
-                alt='stars'
-            ></img>
-            
-        </div>
+        {rating}
 
         
 

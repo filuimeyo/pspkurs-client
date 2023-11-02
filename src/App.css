@@ -145,6 +145,57 @@ h1 {
 }
 
 
+.popular {
+  width: 300px;
+  height: 150px;
+  margin:  0.025rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0, 1);
+  display: flex;
+  align-items: center;
+}
+
+.popular div:nth-of-type(1){
+  width: 35%;
+  height: 70%;
+  border-radius: 50%;
+  overflow: hidden;
+
+}
+
+.popular div:nth-of-type(1) img{
+  height: 100%;
+  width: 100%;
+}
+
+.popular div:nth-of-type(2){
+  width: 60%;
+  margin-left: 2%;
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: rgb(27, 106, 106);
+}
+
+
+.allSubjects{
+  padding: 1rem;
+  background-color: #bbc7d3;
+
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-family: var(--font-raleway);
+  font-weight: 500;
+  display: block;
+  margin: 0 auto;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0, 1);
+}
+.allSubjects:hover{
+  background-color:rgb(27, 106, 106);
+ 
+  transform: scale(1.05, 1.05);
+}
 
 .subject {
   width: 230px;
@@ -254,7 +305,7 @@ h1 {
 
 .teacher div:nth-of-type(2) button{
   background-color: transparent;
- }
+}
 
 .teacher div:nth-of-type(2) img{
   width: 100%;
