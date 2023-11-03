@@ -178,6 +178,38 @@ h1 {
 }
 
 
+.teacherSubj {
+  width: 140px;
+  height: 50px;
+  margin:  0.025rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0, 1);
+  display: flex;
+  align-items: center;
+}
+
+.teacherSubj div:nth-of-type(1){
+  width: 25%;
+  height: 70%;
+  border-radius: 50%;
+  overflow: hidden;
+
+}
+
+.teacherSubj div:nth-of-type(1) img{
+  height: 100%;
+  width: 100%;
+}
+
+.teacherSubj div:nth-of-type(2){
+  width: 60%;
+  margin-left: 2%;
+  font-weight: 600;
+  font-size: 0.7rem;
+  color: rgb(27, 106, 106);
+}
+
 .allSubjects{
   padding: 1rem;
   background-color: #bbc7d3;
@@ -272,12 +304,11 @@ h1 {
   height: 300px;
   margin: 1.5rem;
 
-  display: flex;
-
   position: relative;
   border-radius: 12px;
   overflow: hidden;
   border: none;
+  color: black;
 
   background-color: #cde5f0;
 
@@ -285,34 +316,39 @@ h1 {
   box-shadow: 0px 13px 10px -7px rgba(0, 0, 0, 0.1);
 }
 
-.teacher div:nth-of-type(1) {
+.teacher .content{
+  text-decoration: none;
+  color: #292019;
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.teacher:hover {
+  box-shadow: 0px 30px 18px -8px rgba(0, 0, 0, 0.1);
+  transform: scale(1.05, 1.05);
+}
+
+.teacher .content div:nth-of-type(1) {
   width: 50%;
   height: 100%;
   overflow: hidden;
 }
 
-.teacher div:nth-of-type(1) img {
+.teacher .content div:nth-of-type(1) img {
   height: 100%;
   width: 100%;
 }
 
-.teacher div:nth-of-type(2) {
+.teacher .content div:nth-of-type(2) {
   width: 40px;
   position: absolute;
   top: 4px;
   right: 4px;
+  
 }
 
-.teacher div:nth-of-type(2) button{
-  background-color: transparent;
-}
-
-.teacher div:nth-of-type(2) img{
-  width: 100%;
-  height: 30px;
-}
-
-.teacher div:nth-of-type(3) {
+.teacher .content div:nth-of-type(2) {
   padding: 10px;
   width: 50%;
   height: 100%;
@@ -320,7 +356,7 @@ h1 {
 }
 
 
-.teacher div:nth-of-type(3) p:nth-of-type(1) {
+.teacher .content div:nth-of-type(2) p:nth-of-type(1) {
   margin: 0;
   -webkit-line-clamp: 4; /* Число отображаемых строк */
   display: -webkit-box; /* Включаем флексбоксы */
@@ -328,7 +364,7 @@ h1 {
   overflow: hidden; 
 }
 
-.teacher div:nth-of-type(3) p {
+.teacher .content div:nth-of-type(2) p {
   margin: 0;
   -webkit-line-clamp: 3; /* Число отображаемых строк */
   display: -webkit-box; /* Включаем флексбоксы */
@@ -336,7 +372,9 @@ h1 {
   overflow: hidden; 
 }
 
-.teacher div:nth-of-type(4)  {
+
+
+.teacher .content div:nth-of-type(3)  {
   width: 37px;
   position: absolute;
   display: flex;
@@ -348,6 +386,51 @@ h1 {
 
 }
 
+.teacher .like {
+  width: 40px;
+  position: absolute;
+  top:1px;
+  right: 0;
+}
+
+.teacher  .like button{
+  background-color: transparent;
+}
+
+.teacher  .like img{
+  width: 100%;
+  height: 30px;
+}
+
+
+.tearpagepic{
+  border-radius: 12px;
+  width: 300px;
+  height: 350px;
+  overflow: hidden;
+}
+
+.tearpagepic img{
+  width: 100%;
+  height: 100%;
+}
+
+.teacherinfo{
+  width: 40%;
+}
+
+.teacherinfo .notexpanded{
+  margin: 0;
+  -webkit-line-clamp: 4; /* Число отображаемых строк */
+  display: -webkit-box; /* Включаем флексбоксы */
+  -webkit-box-orient: vertical; /* Вертикальная ориентация */
+  overflow: hidden; 
+}
+
+.teacherinfo .expanded{
+  margin: 0;
+  overflow: auto;
+}
 
 .movie {
   width: 310px;
