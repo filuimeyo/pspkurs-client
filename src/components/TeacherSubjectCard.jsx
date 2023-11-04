@@ -1,7 +1,7 @@
 import React from 'react'
 import { SmallTeacherCard } from '../components/SmallTeacherCard';
 
-export const TeacherSubjectCard = ({subjects, id}) => {
+export const TeacherSubjectCard = ({subjects, lessonPrice, id}) => {
   return (
     <div  className='subjectAndApply'>
         <div>
@@ -12,9 +12,14 @@ export const TeacherSubjectCard = ({subjects, id}) => {
         }
         </div>
 
+        <div>
+          <h5>Стоимость занятия: {lessonPrice} бун</h5>
+        </div>
 
-        <button>
-            Передаю сюда id :{id}
+        <button
+          onClick={(e)=>{alert(`Подать заявку для учителя с id: ${id}`)}}
+        >
+          Подать заявку
         </button>
     </div>
     

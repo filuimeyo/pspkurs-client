@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import SearchIcon from "../search.svg"
 import { SubjectCard } from '../components/SubjectCard';
 
-const API_URL = 'http://localhost:8080/api/v1/registration/subject/'
+const API_URL = 'http://localhost:8080/api/v1/registration/subject'
 
 
 export const SubjectsPage = () => {
@@ -16,6 +16,7 @@ export const SubjectsPage = () => {
     const searcSubjects = async (title) => {  
         const responce = await fetch(
             `${API_URL}?name=${title}`,{});
+            
         
         const data = await responce.json();
     
