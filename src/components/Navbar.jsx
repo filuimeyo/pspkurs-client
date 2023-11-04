@@ -1,16 +1,18 @@
 import React from 'react'
 import UserIcon from '../user.svg'
+import { Link } from 'react-router-dom'
 
 export const Navbar = () => {
   return (
     <header>
-      <button>
-        <img
-          src={UserIcon}
-          alt='profile'
-        ></img>
-      </button>
-      
+      <Link to={"/register"}>
+        <button>
+          <img
+            src={UserIcon}
+            alt='profile'
+          ></img>
+        </button>
+      </Link>
     </header>
   )
 }

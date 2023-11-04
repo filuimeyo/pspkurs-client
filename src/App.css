@@ -119,6 +119,58 @@ h1 {
   box-shadow: 5px 5px 7px #1c1d1f, -5px -5px 7px #222527;
 } */
 
+form{
+  width: 30%;
+  margin: 5rem auto;
+  border: 3px solid white;
+  padding: 1rem;
+  border-radius: 12px;
+}
+
+form input[type=text], form input[type=email], form input[type=password]{
+  padding:10px;
+  margin:10px 0; /*  add top and bottom margin */
+  outline: none;
+  display: block;
+  width: 100%;
+  background: transparent;
+  border-bottom: 2px solid white;
+}
+
+form h3{
+  text-align: center;
+  color: white;
+  font-family: var(--font-raleway);
+}
+
+
+form div{
+  width: 100%;
+  margin: 1rem 0;
+  display: flex;
+  vertical-align: middle;
+  color: white;
+  font-family: var(--font-raleway);
+}
+
+form input[type=radio]{
+  margin-right: 0.1rem;
+  accent-color: rgb(27, 106, 106);
+}
+
+form input[type=submit]{
+  font-size: 0.9rem;
+  font-family: var(--font-raleway);
+  font-weight: 500;
+  margin-right: 0.3rem;
+  padding: 0.5rem;
+  border-radius: 8px;
+}
+form input[type=submit]:hover{
+ background-color: rgb(66, 152, 152); 
+}
+
+
 .empty {
   width: 100%;
   margin-top: 3rem;
@@ -146,6 +198,7 @@ h1 {
 
 
 .popular {
+  padding: 0.5rem;
   width: 300px;
   height: 150px;
   margin:  0.025rem 1.5rem;
@@ -164,6 +217,11 @@ h1 {
 
 }
 
+.popular:hover div:nth-of-type(1){
+  transform: scale(1.05, 1.05);
+  box-shadow: 0px 0px 5px 3px white;
+}
+
 .popular div:nth-of-type(1) img{
   height: 100%;
   width: 100%;
@@ -171,12 +229,21 @@ h1 {
 
 .popular div:nth-of-type(2){
   width: 60%;
-  margin-left: 2%;
+  margin-left: 4%;
   font-weight: 600;
   font-size: 1.2rem;
   color: rgb(27, 106, 106);
+  
 }
 
+.popular:hover div:nth-of-type(2){
+  /* text-shadow: rgb(188, 178, 204) 1px 0 10px; */
+  text-shadow:
+  1px 1px 2px black,
+  0 0 1em  white,
+  0 0 0.2em  rgb(27, 106, 106);
+  color: white;
+}
 
 .teacherSubj {
   width: 190px;
@@ -427,6 +494,7 @@ h1 {
   width: 100%;
   border:1px solid white;
   border-radius: 12px ;
+
 }
 
 .teacherinfo button{
