@@ -1,6 +1,9 @@
 import React from 'react'
 import {useEffect, useState} from "react";
 import { LikedTeacherLiked } from '../components/LikedTeacherLiked';
+import { NotificationCard } from '../components/NotificationCard';
+import { ProfileStudentCard } from '../components/ProfileStudentCard';
+import { ApplicationStudentCard } from '../components/ApplicationStudentCard';
 
 
 const mockedliked = [
@@ -100,6 +103,113 @@ const mockedliked = [
 	}
 ]
 
+const mockedNotif = [
+	{
+		"id": 2,
+		"message": "Новый отклик на заявку!",
+		"details": "На вашу заявку от 2023-11-05 по предмету французский язык откликнулся преподаватель.\n Французский язык, Дженни откликнулась на вашу заявку.\n Вы можете связаться с преподавателем по почте: teacher@gmail.com",
+		"isViewed": false,
+		"createdAt": "2023-11-05T20:14:04"
+	},
+	{
+		"id": 1,
+		"message": "К сожалению вам отказали",
+		"details": "На вашу заявку от 2023-11-04 по предмету aглийский язык пришел отказ.",
+		"isViewed": true,
+		"createdAt": "2023-11-04T20:09:11"
+	}
+]
+
+const mockedUser = {
+	"id": 1,
+	"email": "admin@gmail.com",
+	"password": "$2a$10$nvbOrLeOefDBUK3tiLV8B.CO01bV.EnGTPBwxKne/nRZ7RpWOd9Bi",
+	"appUserRole": "STUDENT",
+	"locked": false,
+	"enabled": false,
+	"teacher": null,
+	"student": {
+		"id": 1,
+		"firstName": "amed",
+		"lastName": "almed",
+		"lessonApplications": []
+	},
+	"username": "admin@gmail.com",
+	"accountNonLocked": true,
+	"authorities": [
+		{
+			"authority": "STUDENT"
+		}
+	],
+	"accountNonExpired": true,
+	"credentialsNonExpired": true
+}
+
+const mockedApplications = [
+
+	{
+		"id": 1,
+		"subject":{
+			"id": 9,
+			"name": "французский язык",
+			"fileName": "264a9112-de14-4b52-a959-5968dad77539.jpg",
+			"filePath": "D:\\Desktop\\uploadspspkurs\\subject\\264a9112-de14-4b52-a959-5968dad77539.jpg",
+			"lessonApplications": []
+		},
+		"teacher": null,
+		"purpose": {
+			"id": 1,
+			"purpose": "подготовка к экзаменам",
+		},
+		"details": "хачу выучить язык за 2 часа",
+		"createdAt": "2023-11-05T20:14:04",
+	},
+	{
+		"id": 2,
+		"subject": {
+			"id": 7,
+			"name": "английский язык",
+			"fileName": "fc1b9aba-3ec8-4ce9-9afb-be199fc895ec.jpg",
+			"filePath": "D:\\Desktop\\uploadspspkurs\\subject\\fc1b9aba-3ec8-4ce9-9afb-be199fc895ec.jpg",
+			"lessonApplications": []
+		},
+		"teacher": {
+			"id": 2,
+			"firstName": "Хермет Сосэдж-Хансен",
+			"lastName": "teacher",
+			"info": null,
+			"lessonPrice": 22.0,
+			"fileName": "a2d94804-1bdc-44ce-a2da-7f42112c36ce.jpg",
+			"filePath": "D:\\Desktop\\uploadspspkurs\\teacherpic\\a2d94804-1bdc-44ce-a2da-7f42112c36ce.jpg",
+			"teacherSubjects": [
+				{
+					"id": 7,
+					"name": "английский язык",
+					"fileName": "fc1b9aba-3ec8-4ce9-9afb-be199fc895ec.jpg",
+					"filePath": "D:\\Desktop\\uploadspspkurs\\subject\\fc1b9aba-3ec8-4ce9-9afb-be199fc895ec.jpg",
+					"lessonApplications": []
+				}
+			],
+			"purposes": [],
+			"certificates": [],
+			"teacherRating": [
+				{
+					"id": 4,
+					"rating": 5,
+					"comment": null
+				}
+			],
+			"finalRating": 5.0,
+			"lessonApplications": []
+		},
+		"createdAt": "2023-11-04T20:14:04",
+		"details": null,
+		"purpose": null
+	}
+
+	
+]
+
 export const StudentProfilePage = () => {
 
     const studentId = 1;
@@ -112,14 +222,21 @@ export const StudentProfilePage = () => {
             id: 1,
             tabTitle: 'Мой профиль',
             title: 'Title 1',
-            content: 'Las tabs se generan automáticamente a partir de un array de objetos, el cual tiene las propiedades: id, tabTitle, title y content.',
+            content: <ProfileStudentCard user = {mockedUser}/>,
             api_url:"1"
         },
         {
             id: 2,
             tabTitle: 'Мои заявки',
             title: 'Title 2',
-            content: 'Contenido de tab 2.',
+            content: 
+				<>
+					{
+                     mockedApplications.map((application) =>
+                      <ApplicationStudentCard key={application.id} application={application}/>
+                     )
+                   }
+				</>,
             api_url:"2"
         },
         {
@@ -130,7 +247,7 @@ export const StudentProfilePage = () => {
                 <>
                    {
                      mockedliked.map((teacher) =>
-                     <LikedTeacherLiked teacher={teacher}/>
+                     <LikedTeacherLiked key={teacher.id} teacher={teacher}/>
                      )
                    }
                 </>,
@@ -141,7 +258,17 @@ export const StudentProfilePage = () => {
             id: 4,
             tabTitle: 'Уведомления',
             title: 'Title 5',
-            content: 'Contenido de tab 5.',
+            content: 
+				<>
+					{
+                     mockedNotif.map((notification) =>
+						<NotificationCard 
+							key={notification.id}
+							notification={notification}
+						/>
+                     )
+                   	}
+				</>,
             api_url:"4"
         }
     ];

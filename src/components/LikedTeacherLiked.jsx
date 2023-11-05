@@ -1,6 +1,7 @@
 import React from 'react'
 import Heart from "../heart.svg"
 import FilledHeart from "../filledheart.svg"
+import { Link } from 'react-router-dom'
 
 export const LikedTeacherLiked = ({teacher}) => {
 
@@ -8,20 +9,23 @@ export const LikedTeacherLiked = ({teacher}) => {
 
   return (
     <div className='likedteacheronprofiledpage'>
-        <div>
-            <div>
-                <img
-                    src={teacher.fileName != null ? "http://localhost:8080/api/v1/registration/teacher/profileimage/file/"+teacher.fileName : "https://via.placeholder.com/300"}
-                    alt='teacher '
-                ></img>
+        <Link  to="/teacher"  state={{ id: teacher.id }} style={{textDecoration: 'none'}} className='linkteacher'>
+            {/* <div className='linkteacher'> */}
+                <div>
+                    <img
+                        src={teacher.fileName != null ? "http://localhost:8080/api/v1/registration/teacher/profileimage/file/"+teacher.fileName : "https://via.placeholder.com/300"}
+                        alt='teacher '
+                    ></img>
 
-            </div>
+                </div>
 
-            <p>
-                {teacher.firstName}
-            </p>
+                <p>
+                    {teacher.firstName}
+                </p>
 
-        </div>
+            {/* </div> */}
+        </Link>
+        
         
         
 
