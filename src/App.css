@@ -84,6 +84,37 @@ h1 {
  
 }
 
+.filterscontainer{
+  margin: 4rem 1.5rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.filterscontainer .selectdiv{
+  padding: 0.7rem 1.75rem;
+  border-radius: 3rem;
+  background: #bbc7d3;
+  margin-right: 0.5rem;
+}
+.filterscontainer select{
+  outline: none;
+  background: transparent;
+  font-size: 1rem;
+  color: #757575;
+}
+
+.filterscontainer .orderbutton{
+  padding: 0.2rem;
+  background: #bbc7d3;
+  border-radius: 3rem;
+}
+
+.filterscontainer .orderbutton div{
+  width: 2rem;
+  height: 2rem;
+}
+
 .search input {
   flex: 1;
   border: none;
@@ -120,7 +151,7 @@ h1 {
 } */
 
 form{
-  width: 30%;
+  width: 40%;
   margin: 5rem auto;
   border: 3px solid white;
   padding: 1rem;
@@ -129,7 +160,7 @@ form{
 
 form input[type=text], form input[type=email], form input[type=password]{
   padding:10px;
-  margin:10px 0; /*  add top and bottom margin */
+  margin:5px 0 0; /*  add top and bottom margin */
   outline: none;
   display: block;
   width: 100%;
@@ -143,6 +174,13 @@ form h3{
   font-family: var(--font-raleway);
 }
 
+form small{
+  margin-top: 0;
+  margin-left: 0.2rem;
+  font-size: 0.8rem;
+  color:  rgb(27, 106, 106);
+
+}
 
 form div{
   width: 100%;
@@ -159,7 +197,7 @@ form input[type=radio]{
 }
 
 form input[type=submit]{
-  font-size: 0.9rem;
+  margin: 0 0 0.4rem 0;
   font-family: var(--font-raleway);
   font-weight: 500;
   margin-right: 0.3rem;
