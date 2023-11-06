@@ -4,6 +4,7 @@ import { LikedTeacherLiked } from '../components/LikedTeacherLiked';
 import { NotificationCard } from '../components/NotificationCard';
 import { ProfileStudentCard } from '../components/ProfileStudentCard';
 import { ApplicationStudentCard } from '../components/ApplicationStudentCard';
+import {UserCard} from '../components/UserCard'
 
 
 const mockedliked = [
@@ -145,6 +146,76 @@ const mockedUser = {
 	"credentialsNonExpired": true
 }
 
+
+const users = [
+	{
+		"id": 1,
+		"email": "student@gmail.com",
+		"password": "$2a$10$nvbOrLeOefDBUK3tiLV8B.CO01bV.EnGTPBwxKne/nRZ7RpWOd9Bi",
+		"appUserRole": "STUDENT",
+		"locked": false,
+		"enabled": false,
+		"teacher": null,
+		"student": {
+			"id": 1,
+			"firstName": "amed",
+			"lastName": "almed",
+		},
+		"accountNonLocked": true,
+		"authorities": [
+			{
+				"authority": "STUDENT"
+			}
+		],
+		"accountNonExpired": true,
+		"credentialsNonExpired": true
+	},
+	{
+		"id": 2,
+		"email": "teacher@gmail.com",
+		"password": "$2a$10$nvbOrLeOefDBUK3tiLV8B.CO01bV.EnGTPBwxKne/nRZ7RpWOd9Bi",
+		"appUserRole": "TEACHER",
+		"locked": false,
+		"enabled": false,
+		"teacher":{
+			"id": 2,
+			"firstName": "Хермет Сосэдж-Хансен",
+			"lastName": "teacher",
+			"info": null,
+			"lessonPrice": 22.0,
+			"fileName": "a2d94804-1bdc-44ce-a2da-7f42112c36ce.jpg",
+			"filePath": "D:\\Desktop\\uploadspspkurs\\teacherpic\\a2d94804-1bdc-44ce-a2da-7f42112c36ce.jpg",
+		},
+		"student": null,
+		"accountNonLocked": true,
+		"authorities": [
+			{
+				"authority": "STUDENT"
+			}
+		],
+		"accountNonExpired": true,
+		"credentialsNonExpired": true
+	},
+	{
+		"id": 3,
+		"email": "admin@gmail.com",
+		"password": "$2a$10$nvbOrLeOefDBUK3tiLV8B.CO01bV.EnGTPBwxKne/nRZ7RpWOd9Bi",
+		"appUserRole": "ADMIN",
+		"locked": false,
+		"enabled": false,
+		"teacher":null,
+		"student": null,
+		"accountNonLocked": true,
+		"authorities": [
+			{
+				"authority": "STUDENT"
+			}
+		],
+		"accountNonExpired": true,
+		"credentialsNonExpired": true
+	}
+]
+
 const mockedApplications = [
 
 	{
@@ -270,6 +341,23 @@ export const StudentProfilePage = () => {
                    	}
 				</>,
             api_url:"4"
+        },
+		{
+            id: 5,
+            tabTitle: 'Аккаунты',
+            title: 'Title 5',
+            content: 
+				<>
+					{
+                     users.map((user) =>
+						<UserCard 
+							key={user.id}
+							user={user}
+						/>
+                     )
+                   	}
+				</>,
+            api_url:"5"
         }
     ];
 
