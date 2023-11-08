@@ -2,32 +2,49 @@ import React from 'react'
 
 
 
-const u ={
-    "id": 3,
-    "email": "admin@gmail.com",
-    "password": "$2a$10$nvbOrLeOefDBUK3tiLV8B.CO01bV.EnGTPBwxKne/nRZ7RpWOd9Bi",
-    "appUserRole": "ADMIN",
-    "locked": false,
-    "enabled": false,
-    "teacher":null,
-    "student": null,
-    "accountNonLocked": true,
-    "authorities": [
-        {
-            "authority": "STUDENT"
-        }
-    ],
-    "accountNonExpired": true,
-    "credentialsNonExpired": true
-}
+
 export const UserCard = ({user}) => {
 
+    const [blocked, setBlocked] = React.useState(user.accountNonLocked);
    
+    
+    
 
   return (
     <div className='usercard'>
 
         
+        <div>
+            {
+                {
+                  'ADMIN': <></>,
+                  'STUDENT': <p><span>имя пользователя: </span>{user.student?.firstName}</p>,
+                  'TEACHER': <p><span>имя пользователя: </span>{user.teacher?.firstName}</p>,
+                }[user.appUserRole]
+            }
+
+            <p><span>почта: </span>{user.email}</p>
+            <p>{user.appUserRole}</p>
+        </div>
+
+        
+       
+        {
+             user.appUserRole!== "ADMIN"?
+             (
+                 <button
+                     className=''
+                     onClick={()=>{
+                         setBlocked(!blocked);
+                         alert(user.id)
+                     }}
+                 >
+                     {
+                         blocked? "заблокировать":"разблокировать"
+                     }
+                 </button>
+             ):(<></>)
+        }
 
         {
             user.teacher?
@@ -39,7 +56,6 @@ export const UserCard = ({user}) => {
                         alt='teacher '
                         ></img>
                     </div> 
-                    <p><span>имя пользователя: </span>{user.teacher.firstName}</p>
                 </>
                 
             ):(<></>)
@@ -56,19 +72,12 @@ export const UserCard = ({user}) => {
                         alt='teacher '
                         ></img>
                     </div> 
-                    <p><span>имя пользователя: </span>{user.student.firstName}</p>
+                   
                 </>
             ):(<></>)
         }
 
-        <p><span>почта: </span>{user.email}</p>
-        <p>{user.appUserRole}</p>
        
-        <button>
-            {
-                user.accountNonLocked? "заблокировать":"разблокировать"
-            }
-        </button>
         
 
     </div>

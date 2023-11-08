@@ -954,6 +954,11 @@ form input[type=submit]:hover{
   border-radius: 12px;
   margin: 0.3rem ;
   padding: 0.7rem;
+  display: flex;
+}
+
+.usercard div:nth-of-type(1){
+  width: 60%
 }
 
 .accoutnpic{
