@@ -3,7 +3,8 @@ import {useEffect, useState} from "react";
 import SearchIcon from "../search.svg"
 import { SubjectCard } from '../components/SubjectCard';
 
-const API_URL = 'http://localhost:8080/api/v1/registration/subject'
+//const API_URL = 'http://localhost:8080/api/v1/registration/subject'
+const API_URL = 'http://localhost:8080/api/v1/public/info/subjects?name='
 
 
 export const SubjectsPage = () => {
@@ -15,11 +16,11 @@ export const SubjectsPage = () => {
 
     const searcSubjects = async (title) => {  
         const responce = await fetch(
-            `${API_URL}?name=${title}`,{});
+             `${API_URL}${title}`,{});
+           
             
         
         const data = await responce.json();
-    
         setSubject(data);  
     }
   
@@ -57,7 +58,7 @@ export const SubjectsPage = () => {
                     {
                         subjects.map(subject => (
                           // <div>{subject[0].name}</div>
-                           <SubjectCard key={subject[0].id} subject={subject} />
+                           <SubjectCard key={subject[0]} subject={subject} />
                         ))
                     }
                 </div>

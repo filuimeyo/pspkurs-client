@@ -5,26 +5,10 @@ import {useEffect, useState} from "react";
 import Up from "../up.svg"
 import Down from "../down.svg"
 
-const API_URL = 'http://localhost:8080/api/v1/registration/teacher/subject/'
+const API_URL = 'http://localhost:8080/api/v1/public/info/teachers/'
+const PURPOSES_API_URL = "http://localhost:8080/api/v1/public/info/purposes"
 
-const purposes =  [
-    {
-        "id": 1,
-        "purpose": "подготовка к экзаменам"
-    }, 
-    {
-        "id": 2,
-        "purpose": "усовершенствование знаний"
-    },  
-    {
-        "id": 3,
-        "purpose": "изучение основ"
-    },
-    {
-        "id": 4,
-        "purpose": "для детей"
-    }
-]
+
 
 const sort =  [
     {
@@ -39,29 +23,43 @@ const sort =  [
 
 export const TeachersPage = () => {
 
-
-
   const location = useLocation()
   const { id } = location.state
 
-  const [selectedPurpose, setSelectedPurpose] = useState();
-  const [selectedSort, setSelectedSort] = useState();
+  const defaultPurpose = {
+    id: -1, 
+    purpose: "выберите цель"
+  }
+
+  const [selectedPurpose, setSelectedPurpose] = useState(defaultPurpose.id);
+  const [selectedSort, setSelectedSort] = useState(sort[0].id);
   const [order, setOrder] = useState(true);
 
   const [teachers, setTeachers] = useState([]);
-//   const [searchTerm, setSeachTerm] = useState('');
+  const [purposesArr, setPurposes] = useState([]);
 
-    const searcTeachers = async (title) => {  
-        const responce = await fetch(
-            `${API_URL}${id}`,{});
+  
+
+    const searcTeachers = async (order, sortType, purposeId) => {  
         
-        const data = await responce.json();
+        Promise.all([
+            fetch(`${API_URL}${id}?order=${order}&sort=${sortType}&purposeId=${purposeId}`,{}),
+            fetch(`${PURPOSES_API_URL}`,{}),
+         
+          ])
+            .then(([resTeacher, resPurposes]) => 
+              Promise.all([resTeacher.json(), resPurposes.json()])
+            )
+            .then(([dataTeacher, dataPurposes]) => {
+               
+              setTeachers(dataTeacher);  
+              setPurposes(dataPurposes)
+            })
     
-        setTeachers(data);  
     }
   
        useEffect(()=>{  
-            searcTeachers('') 
+            searcTeachers(order, 1, -1) 
         }, [])
 
 
@@ -74,17 +72,18 @@ export const TeachersPage = () => {
             <div className='selectdiv'>
                 <select 
                    value={selectedPurpose}
-                   defaultValue={"выберите цель"}
-                   onChange={(e) => setSelectedPurpose(e.target.value)}
+                   //defaultValue={defaultPurpose.id}
+                   onChange={(e) => {
+                     setSelectedPurpose(e.target.value);
+                   }}
                 >
-                    <option disabled={true}  value={"выберите цель"}>выберите цель</option>
+                    <option    value={defaultPurpose.id}>{defaultPurpose.purpose}</option>
                     {
-                        purposes.map((purpose)=>
-                         <option 
-                            key={purpose.id} 
-                            value={purpose.purpose}>{purpose.purpose}
-                        </option>
-                        )
+                        purposesArr.map((purpose)=>(
+                            <option key={purpose.id} value={purpose.id}>
+                                {purpose.purpose}
+                            </option>
+                        ))
                     }
 
                 </select>
@@ -95,15 +94,16 @@ export const TeachersPage = () => {
             <div className='selectdiv'>
                 <select 
                    value={selectedSort}
-                   defaultValue={"сортировать по"}
-                   onChange={(e) => setSelectedSort(e.target.value)}
+                  
+                   onChange={(e) => {
+                    setSelectedSort(e.target.value);
+                }}
                 >
-                    <option disabled={true}  value={"сортировать по"}>сортировать по</option>
                     {
                         sort.map((sort)=>
                          <option 
                             key={sort.id} 
-                            value={sort.purpose}>{sort.purpose}
+                            value={sort.id}>{sort.purpose}
                         </option>
                         )
                     }
@@ -122,6 +122,14 @@ export const TeachersPage = () => {
                         }}
                     />
                 </div>
+            </div>
+
+            <div className='orderbutton'>
+                <button
+                    onClick={ (e)=>searcTeachers(order, selectedSort, selectedPurpose)}
+                >
+                    Найти
+                </button>
             </div>
             
 

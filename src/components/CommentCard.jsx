@@ -6,24 +6,26 @@ export const CommentCard = ({comment}) => {
   return (
     <div className='comment'>
 
+
+
         <div className='commentpic'>
             <img 
-                src={comment[1].fileName != null ? "": "https://via.placeholder.com/300"} 
-                alt={comment[1].firstName}
+                src={comment.student.fileName != null ? "": "https://via.placeholder.com/300"} 
+                alt={comment.student.name}
             ></img>
         </div>
 
         <div>
-            <h4>{comment[1].firstName}</h4>
+            <h4>{comment.student.name}</h4>
             <div>
-                {[...Array(comment[0].rating)].map((x, i) =>
+                {[...Array(comment.rating)].map((x, i) =>
                     <img
                         src={Star}
                         alt='stars'
                         key={i}
                     ></img>
                 )}
-                {[...Array(10-comment[0].rating)].map((x, i) =>
+                {[...Array(10-comment.rating)].map((x, i) =>
                     <img
                         src={OutlinedStar}
                         alt='outstars'
@@ -33,7 +35,7 @@ export const CommentCard = ({comment}) => {
             </div>
 
             <p>
-                {comment[0].comment}
+                {comment.comment}
             </p>
         </div>
 

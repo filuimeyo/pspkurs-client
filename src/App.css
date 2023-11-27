@@ -108,12 +108,20 @@ h1 {
   padding: 0.2rem;
   background: #bbc7d3;
   border-radius: 3rem;
+  margin-right: 0.5rem;
 }
 
 .filterscontainer .orderbutton div{
   width: 2rem;
   height: 2rem;
 }
+.filterscontainer .orderbutton button{
+  background-color: transparent;
+  color: #757575;
+  height: 2rem;
+  font-size: 1rem;
+}
+
 
 .search input {
   flex: 1;

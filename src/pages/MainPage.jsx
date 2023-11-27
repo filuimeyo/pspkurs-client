@@ -3,12 +3,12 @@ import {useEffect, useState} from "react";
 import { PopularSubjectCard } from '../components/PopularSubjectCard';
 import { Link } from 'react-router-dom';
 
-const API_URL = 'http://localhost:8080/api/v1/registration/subject/popular'
+const API_URL = 'http://localhost:8080/api/v1/public/info/popular'
 
 export const MainPage = () => {
 
   const [subjects, setSubject] = useState([]);
-  const [searchTerm, setSeachTerm] = useState('');
+
   
   const searcSubjects = async () => {  
     const responce = await fetch(

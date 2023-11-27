@@ -33,14 +33,14 @@ export const TeacherCard = ({teacher}) => {
             <Link to="/teacher"  state={{ id: teacher.id }} className='content'>
                 <div>
                     <img
-                        src={teacher.fileName != null ? "http://localhost:8080/api/v1/registration/teacher/profileimage/file/"+teacher.fileName : "https://via.placeholder.com/300"}
+                        src={teacher.filename != null ? "http://localhost:8080/api/v1/public/info/teachers/pic/"+teacher.filename : "https://via.placeholder.com/300"}
                         alt='teacher '
                     ></img>
                 </div>
 
 
                 <div>
-                    <h2>{teacher.firstName}</h2>
+                    <h2>{teacher.name}</h2>
                     <p>{teacher.info}</p>
                     <h4>Стоимость занятий: {teacher.lessonPrice} бун</h4>
 
@@ -56,6 +56,7 @@ export const TeacherCard = ({teacher}) => {
             
 
             
+           {/*
             <div className='like'>
                 <button>
                     <img 
@@ -69,6 +70,7 @@ export const TeacherCard = ({teacher}) => {
                     />
                 </button>
             </div>
+            */}
 
 
         </div>

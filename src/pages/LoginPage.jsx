@@ -1,10 +1,17 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Link, useNavigate} from 'react-router-dom'
 import {useForm} from 'react-hook-form';
 import * as yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup'
+import axios from 'axios';
+
+
+const API_URL = "http://localhost:8080/api/v1/public/auth/signin"
 
 export const LoginPage = () => {
+
+ 
+  const navigate = useNavigate();
 
   const schema = yup.object({
     email : yup.string().email().required("ввод email обязателен!"),
@@ -15,10 +22,20 @@ export const LoginPage = () => {
     resolver : yupResolver(schema)
   });
 
-  let api = "http://localhost:8080/api/v1/login"
+
   const onSubmit = (data) => {
-    console.log(data, api)
+    
+
+    axios.post( API_URL, data, {headers: {
+      'Content-Type': 'application/json'}})
+      .then(res => {
+        localStorage.setItem("token", res.data.token )
+        navigate("/profilestudent")
+      })
+      .catch(res => alert(res))
   }
+    
+  
 
   return (
     <form onSubmit = {handleSubmit(onSubmit)}>

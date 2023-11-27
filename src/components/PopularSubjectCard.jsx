@@ -6,7 +6,7 @@ export const PopularSubjectCard = ({subject}) => {
     <Link to={"/teachers"} state={{ id: subject.id }} style={{ textDecoration: 'none' }} >
         <div className='popular' >
             <div>
-                <img src={subject.fileName != null ? "http://localhost:8080/api/v1/registration/subject/image/"+subject.fileName : "https://via.placeholder.com/300"} 
+                <img src={subject.filename != null ? "http://localhost:8080/api/v1/public/info/subjects/pic/"+subject.filename : "https://via.placeholder.com/300"} 
                 alt={subject.name}
                 />
             </div>

@@ -2,67 +2,60 @@ import React from 'react'
 import {useEffect, useState} from "react";
 import { useLocation } from 'react-router-dom'
 import Star from "../star.svg"
-import { Link } from 'react-router-dom'
 
 import { TeacherSubjectCard } from '../components/TeacherSubjectCard';
 import {CommentCard} from '../components/CommentCard';
 import { TeacherCertificatesBlock } from '../components/TeacherCertificatesBlock';
 
 
-const API_URL = 'http://localhost:8080/api/v1/registration/teacher/one/'
+const API_URL = 'http://localhost:8080/api/v1/public/info/teachers/one/'
 
-const RATING_API_URL = 'http://localhost:8080/api/v1/registration/teacher/finalrating/'
-
-const COMMENTS_API_URL = 'http://localhost:8080/api/v1/registration/teacher/comments/'
 
 export const TeacherPage = () => {
 
   const location = useLocation()
-  const { id } = location.state
+  const { id } = location.state || 1
+  console.log(id)
 
   const [expanded, setExpanded] = useState(false);
 
   const [teacher, setTeachers] = useState([]);
-  const [finalRating, setFinalRating] = useState();
-  const [comments, setComments] = useState([]);
-  
-  
+ 
 
-  const searcTeachers = async (title) => {  
-      // const responce = await fetch(
-      //     `${API_URL}${id}`,{});
-      
-      // const data = await responce.json();
-      
-      // setTeachers(data);  
+  const searcTeachers = async () => {  
+       const responce = await fetch(
+           `${API_URL}${id}`,{});
+  
+       const data = await responce.json();
+  
+       setTeachers(data);  
 
-      Promise.all([
-        fetch(`${API_URL}${id}`,{}),
-        fetch(`${RATING_API_URL}${id}`,{}),
-        fetch(`${COMMENTS_API_URL}${id}`,{}),
-      ])
-        .then(([resTeacher, resRating, resComments]) => 
-          Promise.all([resTeacher.json(), resRating.json(), resComments.json()])
-        )
-        .then(([dataTeacher, dataRating, dataComments]) => {
-          setTeachers(dataTeacher);  
-          setFinalRating(dataRating)
-          setComments(dataComments)
-        })
+      //Promise.all([
+      //  fetch(`${API_URL}${id}`,{}),
+      //  fetch(`${RATING_API_URL}${id}`,{}),
+      //  fetch(`${COMMENTS_API_URL}${id}`,{}),
+      //])
+      //  .then(([resTeacher, resRating, resComments]) => 
+      //    Promise.all([resTeacher.json(), resRating.json(), resComments.json()])
+      //  )
+      //  .then(([dataTeacher, dataRating, dataComments]) => {
+      //    setTeachers(dataTeacher);  
+      //    setFinalRating(dataRating)
+      //    setComments(dataComments)
+      //  })
   }
 
   useEffect(()=>{  
-    searcTeachers('') 
-
+    searcTeachers() 
   }, [])
 
   
 
   let rating;
-  if(finalRating != 0.0 && finalRating){
+  if(teacher.finalRating !== 0.0 && teacher.finalRating){
     rating = 
         <div className='teacherPageRating'>
-          {finalRating.toFixed(2)}
+          {teacher.finalRating.toFixed(2)}
           <img
             src={Star}
             alt='stars'
@@ -89,7 +82,7 @@ export const TeacherPage = () => {
   let info;
   if(teacher.info!=null){
     info = 
-    <div >
+    < >
       <div className='teacherinfo'>
         {
 
@@ -106,7 +99,7 @@ export const TeacherPage = () => {
           {expanded?  ('\u25B2') :  ('\u25BC') } 
         </button>
     </div>
-    </div>
+    </>
   }
 
   let certificates;
@@ -129,13 +122,13 @@ export const TeacherPage = () => {
   }
 
   let getComments;
-  if(comments != null && comments.length > 0){
+  if(teacher.teacherRating != null && teacher.teacherRating.length > 0){
     getComments = 
     <div className='commentdiv'>
       <h4 style={{marginLeft:'1rem', marginBottom : '0.5rem'}}>Отзывы:</h4>
       {
-        comments.map(comment =>(
-          <CommentCard key={comment[0].id} comment={comment}/>  
+        teacher.teacherRating.map(comment =>(
+          <CommentCard key={comment.id} comment={comment}/>  
         ))
       }
     </div>
@@ -166,13 +159,13 @@ export const TeacherPage = () => {
 
           <div className='tearpagepic'>
             <img
-              src={teacher.fileName != null ? "http://localhost:8080/api/v1/registration/teacher/profileimage/file/"+teacher.fileName : "https://via.placeholder.com/300"}
+              src={teacher.filename != null ? "http://localhost:8080/api/v1/public/info/teachers/pic/"+teacher.filename : "https://via.placeholder.com/300"}
               alt='teacher '
             ></img>
           </div>
 
           <div style={{marginLeft:'1rem'}}>
-            <h3>{teacher.firstName}</h3>
+            <h3>{teacher.name}</h3>
             {rating}
             {purposes}
           </div>
