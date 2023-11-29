@@ -7,14 +7,14 @@ export const ApplicationStudentCard = ({application}) => {
   return (
     <div className='studentapplication'>
 
-      <h3>Заявка от: {application.createdAt.slice(0,10)}</h3>
+      <h3>Заявка от: {application.applicationDate.slice(0,10)}</h3>
 
 
       
       <Link to={"/teachers"} state={{ id: application.subject.id }} style={{ textDecoration: 'none' }} >
         <div className='twoelement' >
           <div className='imagecontainer'>
-              <img src={application.subject.fileName != null ? "http://localhost:8080/api/v1/registration/subject/image/"+application.subject.fileName : "https://via.placeholder.com/300"} 
+              <img src={application.subject.filename != null ? "http://localhost:8080/api/v1/public/info/subjects/pic/"+application.subject.filename : "https://via.placeholder.com/300"} 
               alt={application.subject.name}
               />
           </div>
@@ -26,17 +26,16 @@ export const ApplicationStudentCard = ({application}) => {
 
     
       {
-        application.teacher != null?
+        application.teacher != null &&
         (
           <div>
             <span>Выбранный преподаватель: </span>
             <Link to="/teacher"  state={{ id: application.teacher.id }} style={{textDecoration: 'none'}} >
-              <span>{application.teacher.firstName}</span>
+              <span>{application.teacher.name}</span>
             </Link>
           </div>
 
-        ):
-        (<></>)
+        )
       }
 
       
@@ -61,7 +60,15 @@ export const ApplicationStudentCard = ({application}) => {
         ):(<></>)
       }
 
-      <div className='delete'>
+      
+      
+    </div>
+  )
+}
+
+
+/*
+<div className='delete'>
         <button>
             <img 
                 src= {DeleteIcon} 
@@ -71,9 +78,4 @@ export const ApplicationStudentCard = ({application}) => {
                 }}
             />
         </button>
-      </div>  
-        
-      
-    </div>
-  )
-}
+      </div>   */

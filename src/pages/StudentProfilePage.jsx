@@ -5,7 +5,11 @@ import { NotificationCard } from '../components/NotificationCard';
 import { ProfileStudentCard } from '../components/ProfileStudentCard';
 import { ApplicationStudentCard } from '../components/ApplicationStudentCard';
 import {UserCard} from '../components/UserCard'
+import {useNavigate} from 'react-router-dom';
+import axios from 'axios';
 
+
+const API_URL = "http://localhost:8080/api/v1/user/profile"
 
 const mockedliked = [
 	{
@@ -285,81 +289,102 @@ export const StudentProfilePage = () => {
 
     const studentId = 1;
 
+	const [tabs, setTabs] = useState([]);
+
+
+
+
+	const navigate = useNavigate();
+
+	const serchStudent = async () => { 
+		const token =  localStorage.getItem("token");
+
+		const headers = {
+			Authorization: `Bearer ${token}`,
+	
+		};
+
+
+		axios.get(API_URL,{headers})
+		.then(function (response) {
+			console.log(response.data)
+
+			switch(response.data.role){
+				case "STUDENT" : {
+
+					setTabs(
+						[
+							{
+								id: 1,
+								tabTitle: 'Мой профиль',
+								content: <ProfileStudentCard user = {mockedUser}/>,
+							},
+							{
+								id: 2,
+								tabTitle: 'Мои заявки',
+								content:
+									response.data.applications!=null &&
+									(
+										response.data.applications.length>0?
+										(
+											response.data.applications.map((application) =>
+												<ApplicationStudentCard key={application.id} application={application}/>
+											)
+										):(
+											<p>У вас пока нет заявок</p>
+										)
+									
+									)
+							},
+							{
+								id: 3,
+								tabTitle: 'Отклики',
+								content:
+									response.data.feedbacks!=null &&
+									(
+										response.data.feedbacks.length>0 ?
+										(
+											response.data.feedbacks.map((application) =>
+											<NotificationCard 
+												key={application.id}
+												notification={application}
+											/>
+											)
+										):(
+											<p>На ваши заявки пока нет откликов</p>
+										)
+									)
+
+							}
+						]
+						
+					)
+					
+				}	
+				case "TEACHER": {
+
+				}
+				case "ADMIN":{
+
+				}
+			}
+			
+		})
+		.catch(function (error) {
+			
+			navigate("/login"); 
+		});
+	}
+
+	useEffect(()=>{  
+		serchStudent() 
+	}, [])
+
    
 
     const [currentTab, setCurrentTab] = useState('1');
-    const tabs = [
-        {
-            id: 1,
-            tabTitle: 'Мой профиль',
-            title: 'Title 1',
-            content: <ProfileStudentCard user = {mockedUser}/>,
-            api_url:"1"
-        },
-        {
-            id: 2,
-            tabTitle: 'Мои заявки',
-            title: 'Title 2',
-            content: 
-				<>
-					{
-                     mockedApplications.map((application) =>
-                      <ApplicationStudentCard key={application.id} application={application}/>
-                     )
-                   }
-				</>,
-            api_url:"2"
-        },
-        {
-            id: 3,
-            tabTitle: 'Понравившиеся учителя',
-            title: 'Title 3',
-            content: 
-                <>
-                   {
-                     mockedliked.map((teacher) =>
-                     <LikedTeacherLiked key={teacher.id} teacher={teacher}/>
-                     )
-                   }
-                </>,
-            api_url:`http://localhost:8080/api/v1/registration/student/liked/${studentId}`
-        },
-       
-        {
-            id: 4,
-            tabTitle: 'Уведомления',
-            title: 'Title 5',
-            content: 
-				<>
-					{
-                     mockedNotif.map((notification) =>
-						<NotificationCard 
-							key={notification.id}
-							notification={notification}
-						/>
-                     )
-                   	}
-				</>,
-            api_url:"4"
-        },
-		{
-            id: 5,
-            tabTitle: 'Аккаунты',
-            title: 'Title 5',
-            content: 
-				<>
-					{
-                     users.map((user) =>
-						<UserCard 
-							key={user.id}
-							user={user}
-						/>
-                     )
-                   	}
-				</>,
-            api_url:"5"
-        }
-    ];
+	
+    
 
     const handleTabClick = (e) => {
         setCurrentTab(e.target.id);
@@ -369,8 +394,16 @@ export const StudentProfilePage = () => {
     return (
         <div className='profilecontainer'>
             <div className='tabs'>
-                {tabs.map((tab, i) =>
-                    <button key={i} id={tab.id} disabled={currentTab === `${tab.id}`} onClick={(handleTabClick)}>{tab.tabTitle}</button>
+                {
+					tabs.length>0 && tabs.map((tab, i) =>
+                    <button 
+						key={i} 
+						id={tab.id} 
+						disabled={currentTab === `${tab.id}`} 
+						onClick={(handleTabClick)}
+						>
+						{tab.tabTitle}
+					</button>
                 )}
             </div>
             <div className='content'>
@@ -386,3 +419,81 @@ export const StudentProfilePage = () => {
         </div>
     );
 }
+
+
+/*
+
+const tabs = [
+	{
+		id: 1,
+		tabTitle: 'Мой профиль',
+		title: 'Title 1',
+		content: <ProfileStudentCard user = {mockedUser}/>,
+		api_url:"1"
+	},
+	{
+		id: 2,
+		tabTitle: 'Мои заявки',
+		title: 'Title 2',
+		content: 
+			<>
+				{
+				 mockedApplications.map((application) =>
+				  <ApplicationStudentCard key={application.id} application={application}/>
+				 )
+			   }
+			</>,
+		api_url:"2"
+	},
+	{
+		id: 3,
+		tabTitle: 'Понравившиеся учителя',
+		title: 'Title 3',
+		content: 
+			<>
+			   {
+				 mockedliked.map((teacher) =>
+				 <LikedTeacherLiked key={teacher.id} teacher={teacher}/>
+				 )
+			   }
+			</>,
+		api_url:`http://localhost:8080/api/v1/registration/student/liked/${studentId}`
+	},
+   
+	{
+		id: 4,
+		tabTitle: 'Уведомления',
+		title: 'Title 5',
+		content: 
+			<>
+				{
+				 mockedNotif.map((notification) =>
+					<NotificationCard 
+						key={notification.id}
+						notification={notification}
+					/>
+				 )
+				   }
+			</>,
+		api_url:"4"
+	},
+	{
+		id: 5,
+		tabTitle: 'Аккаунты',
+		title: 'Title 5',
+		content: 
+			<>
+				{
+				 users.map((user) =>
+					<UserCard 
+						key={user.id}
+						user={user}
+					/>
+				 )
+				   }
+			</>,
+		api_url:"5"
+	}
+];
+
+*/

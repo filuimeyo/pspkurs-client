@@ -29,8 +29,9 @@ export const LoginPage = () => {
     axios.post( API_URL, data, {headers: {
       'Content-Type': 'application/json'}})
       .then(res => {
+        console.log(res.data)
         localStorage.setItem("token", res.data.token )
-        navigate("/profilestudent")
+        navigate("/profilestudent");
       })
       .catch(res => alert(res))
   }
