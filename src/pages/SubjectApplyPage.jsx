@@ -147,7 +147,7 @@ export const SubjectApplyPage = () => {
                     </div>
 
                     <button
-                        onClick={(handlePurposeClick)}
+                        onClick={(handleResetClick)}
                         className='restbtn'
                     >
                         сбросить

@@ -1,16 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState , useContext} from 'react'
 import { Link, useNavigate} from 'react-router-dom'
 import {useForm} from 'react-hook-form';
 import * as yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup'
 import axios from 'axios';
+import { UserContext } from '../App';
 
 
 const API_URL = "http://localhost:8080/api/v1/public/auth/signin"
 
 export const LoginPage = () => {
 
- 
+  const { user, setUser } = useContext( UserContext);
   const navigate = useNavigate();
 
   const schema = yup.object({
@@ -29,6 +30,7 @@ export const LoginPage = () => {
     axios.post( API_URL, data, {headers: {
       'Content-Type': 'application/json'}})
       .then(res => {
+        setUser(true)
         console.log(res.data)
         localStorage.setItem("token", res.data.token )
         navigate("/profilestudent");

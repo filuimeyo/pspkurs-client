@@ -1,5 +1,5 @@
 import React from 'react'
-import {useEffect, useState} from "react";
+import {useEffect, useState,  useContext} from "react";
 import { LikedTeacherLiked } from '../components/LikedTeacherLiked';
 import { NotificationCard } from '../components/NotificationCard';
 import { ProfileStudentCard } from '../components/ProfileStudentCard';
@@ -7,6 +7,8 @@ import { ApplicationStudentCard } from '../components/ApplicationStudentCard';
 import {UserCard} from '../components/UserCard'
 import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
+
+import { UserContext } from '../App';
 
 
 const API_URL = "http://localhost:8080/api/v1/user/profile"
@@ -287,14 +289,15 @@ const mockedApplications = [
 
 export const StudentProfilePage = () => {
 
-    const studentId = 1;
-
+	const { user, setUser } = useContext( UserContext);
 	const [tabs, setTabs] = useState([]);
-
-
-
-
 	const navigate = useNavigate();
+
+	
+	if(!user){
+		navigate("/login")
+	}
+
 
 	const serchStudent = async () => { 
 		const token =  localStorage.getItem("token");

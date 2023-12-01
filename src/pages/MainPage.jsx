@@ -1,11 +1,13 @@
 import React from 'react'
-import {useEffect, useState} from "react";
+import {useEffect, useState, useContext} from "react";
 import { PopularSubjectCard } from '../components/PopularSubjectCard';
 import { Link } from 'react-router-dom';
-
+import { UserContext } from '../App';
 const API_URL = 'http://localhost:8080/api/v1/public/info/popular'
 
 export const MainPage = () => {
+
+  const { user, setUser } = useContext( UserContext);
 
   const [subjects, setSubject] = useState([]);
 
@@ -24,8 +26,8 @@ export const MainPage = () => {
   }, [])
 
   return (
-
     <div>
+     
       <h2>Самые популярные предметы</h2>
 
       {

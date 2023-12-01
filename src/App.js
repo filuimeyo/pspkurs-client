@@ -12,6 +12,7 @@ import { SubjectApplyPage } from "./pages/SubjectApplyPage";
 
 
 import './App.css';
+import { createContext, useState } from "react";
 
 
 /*
@@ -25,23 +26,31 @@ import SearchIcon from './search.svg';
 
 const API_URL = 'http://www.omdbapi.com/?apikey=ff749f87'*/
 
+export const UserContext = createContext(null)
 
 const App = () =>{
 
-    return(
-        <Layout>
-            <Routes>
-                <Route path='/' element={<MainPage/>}></Route>
-                <Route path='subjects' element={<SubjectsPage/>}></Route>
-                <Route path='teachers' element={<TeachersPage/>}></Route>
-                <Route path='teacher' element={<TeacherPage/>}></Route>
-                <Route path='register' element={<RegisterPage/>}></Route>
-                <Route path='login' element={<LoginPage/>}></Route>
-                <Route path='profilestudent' element={<StudentProfilePage/>}></Route>
-                <Route path='subjectapply' element={<SubjectApplyPage/>}></Route>
 
-            </Routes>
-        </Layout>
+    const [user, setUser] = useState(false)
+    
+    return(
+
+        <UserContext.Provider value={{user, setUser}}>
+            <Layout>
+                <Routes>
+                    <Route path='/' element={<MainPage/>}></Route>
+                    <Route path='subjects' element={<SubjectsPage/>}></Route>
+                    <Route path='teachers' element={<TeachersPage/>}></Route>
+                    <Route path='teacher' element={<TeacherPage/>}></Route>
+                    <Route path='register' element={<RegisterPage/>}></Route>
+                    <Route path='login' element={<LoginPage/>}></Route>
+                    <Route path='profilestudent' element={<StudentProfilePage/>}></Route>
+                    <Route path='subjectapply' element={<SubjectApplyPage/>}></Route>
+                </Routes>
+            </Layout>
+
+        </UserContext.Provider>
+        
 
     )
 
