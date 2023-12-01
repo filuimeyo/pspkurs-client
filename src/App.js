@@ -8,6 +8,7 @@ import {LoginPage} from "./pages/LoginPage"
 import {RegisterPage} from "./pages/RegisterPage"
 import { SubjectsPage } from "./pages/SubjectsPage";
 import { StudentProfilePage } from "./pages/StudentProfilePage";
+import { SubjectApplyPage } from "./pages/SubjectApplyPage";
 
 
 import './App.css';
@@ -37,6 +38,8 @@ const App = () =>{
                 <Route path='register' element={<RegisterPage/>}></Route>
                 <Route path='login' element={<LoginPage/>}></Route>
                 <Route path='profilestudent' element={<StudentProfilePage/>}></Route>
+                <Route path='subjectapply' element={<SubjectApplyPage/>}></Route>
+
             </Routes>
         </Layout>
 
