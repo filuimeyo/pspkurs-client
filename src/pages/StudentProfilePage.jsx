@@ -4,6 +4,7 @@ import { LikedTeacherLiked } from '../components/LikedTeacherLiked';
 import { NotificationCard } from '../components/NotificationCard';
 import { ProfileStudentCard } from '../components/ProfileStudentCard';
 import { ApplicationStudentCard } from '../components/ApplicationStudentCard';
+import { ApplicationSubjectCard } from '../components/ApplicationSubjectCard';
 import {UserCard} from '../components/UserCard'
 import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
@@ -331,7 +332,7 @@ export const StudentProfilePage = () => {
 										response.data.applications.length>0?
 										(
 											response.data.applications.map((application) =>
-												<ApplicationStudentCard key={application.id} application={application}/>
+												<ApplicationStudentCard key={application.id} application={application} role = {response.data.role}/>
 											)
 										):(
 											<p>У вас пока нет заявок</p>
@@ -351,6 +352,7 @@ export const StudentProfilePage = () => {
 											<NotificationCard 
 												key={application.id}
 												notification={application}
+												role = {response.data.role}
 											/>
 											)
 										):(
@@ -362,13 +364,142 @@ export const StudentProfilePage = () => {
 						]
 						
 					)
+
+					break;
 					
 				}	
 				case "TEACHER": {
+					setTabs(
+						[
+							{
+								id: 1,
+								tabTitle: 'Мой профиль',
+								content: <ProfileStudentCard user = {mockedUser}/>,
+							},
+							{
+								id: 2,
+								tabTitle: 'Мои заявки',
+								content:
+									response.data.applications!=null &&
+									(
+										response.data.applications.length>0?
+										(
+											response.data.applications.map((application) =>
+												<ApplicationStudentCard key={application.id} 
+												application={application}
+												role = {response.data.role}
+												student={application.student}
+												/>
+											)
+										):(
+											<p>У вас пока нет заявок</p>
+										)
+									
+									)
+							},
+							{
+								id: 3,
+								tabTitle: 'Мои отклики',
+								content:
+									response.data.feedbacks!=null &&
+									(
+										response.data.feedbacks.length>0 ?
+										(
+											response.data.feedbacks.map((application) =>
+											<NotificationCard 
+												key={application.id}
+												notification={application}
+												role = {response.data.role}
+											/>
+											)
+										):(
+											<p>Вы еще не откликались на заявки</p>
+										)
+									)
 
+							},
+							{
+								id: 4,
+								tabTitle: 'Заявки на предметы',
+								content:
+									response.data.subjectApplications!=null &&
+									(
+										response.data.subjectApplications.length>0 ?
+										(
+											response.data.subjectApplications.map((application) =>
+											<ApplicationSubjectCard 
+												key={application.id}
+												application={application}
+												
+											/>
+											)
+										):(
+											<p>Пока нет заявок на предметы</p>
+										)
+									)
+
+							}
+						]
+						
+					)
+					break;
 				}
 				case "ADMIN":{
+					setTabs(
+						[
+							{
+								id: 1,
+								tabTitle: 'Мой профиль',
+								content: <ProfileStudentCard user = {mockedUser}/>,
+							},
+							{
+								id: 2,
+								tabTitle: 'Заявки',
+								content:
+									response.data.applications!=null &&
+									(
+										response.data.applications.length>0?
+										(
+											response.data.applications.map((application) =>
+												<ApplicationStudentCard key={application.id} 
+												application={application} 
+												student={application.student}
+												role = {response.data.role}
+												/>
+											)
+										):(
+											<p>Нет заявок</p>
+										)
+									
+									)
+							},
+							{
+								id: 3,
+								tabTitle: 'Отклики',
+								content:
+									response.data.feedbacks!=null &&
+									(
+										response.data.feedbacks.length>0 ?
+										(
+											response.data.feedbacks.map((application, i) =>
+											<NotificationCard 
+												key={i}
+												notification={application}
+												student={application.application.student}
+												role = {response.data.role}
+											/>
+											)
+										):(
+											<p>Нет откликов</p>
+										)
+									)
 
+							}
+						]
+						
+					)
+					break;
+					
 				}
 			}
 			
