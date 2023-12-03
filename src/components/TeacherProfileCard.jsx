@@ -55,17 +55,17 @@ export const TeacherProfileCard = ({suser}) => {
             "Content-Type": "application/json"
 		};
         console.log(body)
-        //axios.put(UPDATE_PROFILE_URL, body, {headers})
-        //    .then(response => {
-        //      // Handle success
-        //        alert('successfully updated profile')
-        //        console.log(response.data)
-        //    })
-        //    .catch(error => {
-        //      // Handle error
-        //      alert(error)
-        //      console.error(error);
-        //});
+        axios.put(UPDATE_PROFILE_URL, body, {headers})
+            .then(response => {
+              // Handle success
+                alert('successfully updated profile')
+                console.log(response.data)
+            })
+            .catch(error => {
+              // Handle error
+              alert(error)
+              console.error(error);
+        });
 
        
        
