@@ -889,17 +889,40 @@ form input[type=submit]:hover{
   margin: 0.3rem 0;
   padding-right: 3rem;
 }
-.profilePage div:nth-of-type(1){
+.profilePage .imagediv{
   /* margin: auto; */
-  width: 250px;
-  height: 250px;
+  width: 200px;
+  height: 200px;
   border-radius: 250px;
   overflow: hidden;
 }
 
-.profilePage div:nth-of-type(1) img{
+.profilePage .imagediv img{
   width: 100%;
   height: 100%;
+}
+
+.profilePage .rounded{
+  margin-top: 1rem;
+  border: 2px solid white;
+  border-radius: 7px;
+  padding: 10px;
+}
+
+.profilePage .rounded textarea{
+  width: 100%;
+  height: 100%;
+  background: transparent;
+}
+
+.profilePage .rounded .container {
+  width: 100%;
+  margin-top: 0.3rem;
+  margin-bottom: 0.3rem;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .profilePage div:nth-of-type(2){
@@ -907,7 +930,7 @@ form input[type=submit]:hover{
 }
 
 .profilePage div:nth-of-type(2) input{
-  font-size: 1.2rem;
+  font-size: 0.9rem;
   padding:10px;
   margin:10px 0; /*  add top and bottom margin */
   outline: none;
@@ -917,11 +940,77 @@ form input[type=submit]:hover{
   border-bottom: 2px solid white;
 }
 
-.profilePage div:nth-of-type(2) button{
+.profilePage div:nth-of-type(2) input[type="number"]{
+  width: 80px;
+  font-size: 0.8rem;
+  display: inline;
+}
+
+.imagetd{
+  width: 60px;
+  height: 40px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.imagetd img{
+  width: 100%;
+}
+
+.subjecttable{
+  width: 100%;
+}
+
+.subjecttable, .subjecttable td{
+ 
+}
+
+.subjecttable td:first-child{
+  width: 60px;
+}
+
+.subjecttable .delete{
+  background-color: transparent;
+  width: 25px;
+  margin: auto;
+}
+
+
+ 
+.subjecttable td:last-child{
+  width: 40px
+}
+
+.subjecttable .text{
+  width: 50%
+}
+
+.profilePage .subjimagediv div{
+  width: 80px;
+  height: 60px;
+  overflow: hidden;
+}
+
+.profilePage .subjimagediv p{
+  font-size: 0.6rem;
+}
+
+.profilePage .subjimagediv div img{
+  width: 100%;
+}
+
+
+
+.profilePage div:nth-of-type(2) h5{
   font-size: 0.9rem;
+  text-align: center;
+}
+
+.profilePage div:nth-of-type(2) button{
+  font-size: 0.8rem;
   font-family: var(--font-raleway);
   font-weight: 500;
   margin-top: 0.4rem;
+  margin-right: 0.4rem;
   padding: 0.5rem;
   border-radius: 8px;
 }
@@ -1125,6 +1214,80 @@ form input[type=submit]:hover{
 
 .subjectappll:hover{
   background-color:rgb(79, 74, 80); 
+}
+
+
+
+.edittable{
+  margin: auto;
+  border-spacing: 10px;
+  border-collapse: collapse;
+  border: 2px solid white;
+  
+}
+
+.edittable td{
+  padding: 10px;
+  border: 2px solid white;
+} 
+
+
+
+.edittable button{
+  margin: auto;
+  padding: 0.1rem;
+  border-radius: 2px;
+  background-color:#c1cef7; 
+ 
+
+}
+
+
+
+
+
+.addbuttonSubj{
+  position: fixed;
+  right: 40px;
+  bottom: 40px;
+  font-size: 30px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  background-color: #c1cef7; 
+  color: white;
+}
+
+.addbuttonSubj:hover{
+  background-color: #878faa; 
+}
+
+
+.editimgdiv{
+  width: 80px;
+  height: 80px;
+  overflow: hidden;
+  margin: 1rem auto;
+} 
+.editimgdiv img{
+  width: 100%;
+
+}
+
+
+
+input[type=file]{
+  border: 1px solid #c1cef7;
+  padding-right: 10px;
+  
+}
+
+
+input[type=file]::file-selector-button {
+  padding: 0.1rem;
+  border-radius: 2px;
+  background-color:#c1cef7;
+  border: none; 
 }
 
 

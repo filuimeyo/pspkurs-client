@@ -174,15 +174,3 @@ export const ApplicationStudentCard = ({application, student, role}) => {
 }
 
 
-/*
-<div className='delete'>
-        <button>
-            <img 
-                src= {DeleteIcon} 
-                alt='delete'
-                onClick={(e)=>{
-                  alert(application.id)
-                }}
-            />
-        </button>
-      </div>   */

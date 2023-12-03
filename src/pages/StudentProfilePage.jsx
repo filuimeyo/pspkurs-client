@@ -6,10 +6,11 @@ import { ProfileStudentCard } from '../components/ProfileStudentCard';
 import { ApplicationStudentCard } from '../components/ApplicationStudentCard';
 import { ApplicationSubjectCard } from '../components/ApplicationSubjectCard';
 import {UserCard} from '../components/UserCard'
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, Link} from 'react-router-dom';
 import axios from 'axios';
 
 import { UserContext } from '../App';
+import { TeacherProfileCard } from '../components/TeacherProfileCard';
 
 
 const API_URL = "http://localhost:8080/api/v1/user/profile"
@@ -292,6 +293,8 @@ export const StudentProfilePage = () => {
 
 	const { user, setUser } = useContext( UserContext);
 	const [tabs, setTabs] = useState([]);
+
+	const [isAdmin, setIsAdmin] = useState(false)
 	const navigate = useNavigate();
 
 	
@@ -321,7 +324,7 @@ export const StudentProfilePage = () => {
 							{
 								id: 1,
 								tabTitle: 'Мой профиль',
-								content: <ProfileStudentCard user = {mockedUser}/>,
+								content: <ProfileStudentCard user = {response.data.user}/>,
 							},
 							{
 								id: 2,
@@ -374,7 +377,7 @@ export const StudentProfilePage = () => {
 							{
 								id: 1,
 								tabTitle: 'Мой профиль',
-								content: <ProfileStudentCard user = {mockedUser}/>,
+								content: <TeacherProfileCard suser = {response.data.user}/>,
 							},
 							{
 								id: 2,
@@ -498,6 +501,8 @@ export const StudentProfilePage = () => {
 						]
 						
 					)
+
+					setIsAdmin(true)
 					break;
 					
 				}
@@ -538,7 +543,29 @@ export const StudentProfilePage = () => {
 						>
 						{tab.tabTitle}
 					</button>
+					
                 )}
+
+
+				{
+					isAdmin &&
+					<>
+					
+						<Link
+          					style={{textDecoration: 'none', color: 'rgb(27, 106, 106)', fontSize: '0.9rem'}}
+           					 to={'/subjectedit'}
+          				> 
+						<button>Предметы</button>
+        				</Link>
+
+						<Link
+          					style={{textDecoration: 'none', color: 'rgb(27, 106, 106)', fontSize: '0.9rem'}}
+           					 to={'/purposeedit'}
+          				> 
+						<button>Цели</button>
+        				</Link>
+					</>
+				}
             </div>
             <div className='content'>
                 {tabs.map((tab, i) =>
