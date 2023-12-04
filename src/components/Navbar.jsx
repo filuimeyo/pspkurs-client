@@ -10,13 +10,16 @@ export const Navbar = () => {
   return (
     <header>
 
-       
-        <Link
+      <div>
+       <Link
           style={{textDecoration: 'none', color: 'rgb(27, 106, 106)', fontSize: '0.9rem'}}
             to={'/'}
-          > Главная
+          > 
+          <h3 className='link'>Главная</h3>
 
         </Link>
+      </div>
+       
 
      
 

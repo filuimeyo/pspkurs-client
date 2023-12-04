@@ -26,36 +26,54 @@ export const MainPage = () => {
   }, [])
 
   return (
+    <>
     <div>
      
-      <h2>Самые популярные предметы</h2>
+     <h2>Самые популярные предметы</h2>
 
-      {
-        subjects?.length > 0
-        ? (
-            <div className="container">
-      
-                {
-                    subjects.map(subject => (
-                      // <div>{subject[0].name}</div>
-                      <PopularSubjectCard key={subject.id} subject={subject}/>
-                       
-                    ))
-                }
-            </div>
-        ):
-        (
-            <div className="empty">
-                <h2>No subjects found</h2>
-            </div>
-        ) 
-      }
+     {
+       subjects?.length > 0
+       ? (
+           <div className="container">
+     
+               {
+                   subjects.map(subject => (
+                     // <div>{subject[0].name}</div>
+                     <PopularSubjectCard key={subject.id} subject={subject}/>
+                      
+                   ))
+               }
+           </div>
+       ):
+       (
+           <div className="empty">
+               <h2>No subjects found</h2>
+           </div>
+       ) 
+     }
 
-      <Link style={{ textDecoration: 'none' }} to={"/subjects"}>
-        <button className='allSubjects'>все предметы</button>
+     <Link style={{ textDecoration: 'none' }} to={"/subjects"}>
+       <button className='allSubjects'>все предметы</button>
+     </Link>
+     
+
+   </div>
+
+   <div className='applylinkdiv'>
+
+      <div>
+
+        <h2>Затрудняетесь с выбором преподавателя?</h2>
+        <h3>Заполните заявку на предмет и преподаватели сами с вами свяжуться!</h3>
+      </div>
+     
+
+      <Link style={{ textDecoration: 'none' }} to={"/subjectapply"}>
+        <button className='allSubjects'>Перейти к заполению заявки</button>
       </Link>
       
 
     </div>
+    </>
   )
 }
