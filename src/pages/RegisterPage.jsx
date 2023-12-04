@@ -4,10 +4,13 @@ import {useForm} from 'react-hook-form';
 import * as yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup'
 import axios from 'axios';
+import { UserContext } from '../App';
 
 const API_URL = "http://localhost:8080/api/v1/public/auth/signup"
 
 export const RegisterPage = () => {
+
+  const { user, setUser } = React.useContext( UserContext);
 
   const navigate = useNavigate();
   const [activeCheckbox, setActiveCheckbox] = React.useState("STUDENT");
@@ -36,12 +39,9 @@ export const RegisterPage = () => {
       'Content-Type': 'application/json'}})
       .then(res => {
         console.log(res.data)
-        localStorage.setItem("token", res.data.token )
-        switch(res.data.role){
-          case "ADMIN" : alert("admin poca netu"); break;
-          case "STUDENT": navigate("/profilestudent"); break;
-          case "TEACHER": alert("teacher poca netu"); break;
-        }
+        setUser(true)
+        navigate("/profilestudent")
+       
         
       })
       .catch(res => alert(res))

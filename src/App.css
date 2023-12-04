@@ -326,6 +326,26 @@ form input[type=submit]:hover{
   color: rgb(27, 106, 106);
 }
 
+.addcommtext{
+  width: 600px;
+  background-color: transparent;
+  border-bottom: 1px solid white;
+  font-size: 1rem;
+  display: block;
+  margin: 1rem 0;
+}
+
+.addcommtext:focus{
+  outline: none;
+}
+
+.addcomm{
+  padding: 1%;
+  width: 100px;
+  border-radius: 4px;
+  background: #f1f3f9;
+}
+
 .allSubjects{
   padding: 1rem;
   background-color: #bbc7d3;
@@ -960,9 +980,7 @@ form input[type=submit]:hover{
   width: 100%;
 }
 
-.subjecttable, .subjecttable td{
- 
-}
+
 
 .subjecttable td:first-child{
   width: 60px;

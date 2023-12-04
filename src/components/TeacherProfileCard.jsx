@@ -244,8 +244,11 @@ export const TeacherProfileCard = ({suser}) => {
                     disabled={!isEditable}
                     value = {suser.email}
                 />
-                <button onClick={(e) => alert(suser.id)}>
-                    Изменить пароль
+                <button >
+                    <Link to={"/changepassword"} style={{ textDecoration: 'none', fontSize: '0.8rem', color : "black" }} >
+                        Изменить пароль                   
+                    </Link>
+                
                 </button>
 
                 <button onClick={(e) => {setUser(false)}}>

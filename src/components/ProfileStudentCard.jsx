@@ -2,6 +2,7 @@ import React from 'react'
 
 import { UserContext } from '../App';
 import { useState , useContext} from 'react'
+import { Link } from 'react-router-dom'
 
 export const ProfileStudentCard = ({user: userc}) => {
     const { user, setUser } = useContext( UserContext);
@@ -23,10 +24,12 @@ export const ProfileStudentCard = ({user: userc}) => {
             // placeholder='password'
             value = {userc.email}
             />
-            <button onClick={(e) => alert(userc.id)}>
-                Изменить пароль
+           <button >
+                    <Link to={"/changepassword"} style={{ textDecoration: 'none', fontSize: '0.8rem', color : "black" }} >
+                        Изменить пароль                   
+                    </Link>
+                
             </button>
-
             <button onClick={(e) => {setUser(false)}}>
                Выйти
             </button>

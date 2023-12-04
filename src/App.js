@@ -11,6 +11,7 @@ import { StudentProfilePage } from "./pages/StudentProfilePage";
 import { SubjectApplyPage } from "./pages/SubjectApplyPage";
 import {SubjectEditPage} from "./pages/SubjectEditPage"
 import { PurposeEditPage } from "./pages/PurposeEditPage";
+import { ChangePasswordPage } from "./pages/ChangePasswordPage";
 
 
 import './App.css';
@@ -50,6 +51,8 @@ const App = () =>{
                     <Route path='subjectapply' element={<SubjectApplyPage/>}></Route>
                     <Route path='subjectedit' element={<SubjectEditPage/>}></Route>
                     <Route path='purposeedit' element={<PurposeEditPage/>}></Route>
+                    
+                    <Route path='changepassword' element={<ChangePasswordPage/>}></Route>
                 </Routes>
             </Layout>
 
