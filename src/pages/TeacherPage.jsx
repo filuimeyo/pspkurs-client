@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import { useLocation } from 'react-router-dom'
 import Star from "../star.svg"
 import { UserContext } from '../App';
+import { Chart } from 'react-google-charts';
 
 
 import OutlinedStar from "../outlinedstar.svg"
@@ -33,6 +34,13 @@ export const TeacherPage = () => {
   const [expanded, setExpanded] = useState(false);
 
   const [teacher, setTeachers] = useState([]);
+
+
+  const [map, setMap] = useState(null);
+
+    let chartData;
+    let chartOptions;
+  
  
 
   const searcTeachers = async () => {  
@@ -40,7 +48,29 @@ export const TeacherPage = () => {
            `${API_URL}${id}`,{});
   
        const data = await responce.json();
-  
+        console.log(data);
+
+        const ratingCountMap = new Map();
+
+        for (let i = 1; i <= 10; i++) {
+          ratingCountMap.set(i, 0);
+        }
+        
+        data.teacherRating.forEach((obj) => {
+          const rating = obj.rating;
+        
+          // Увеличьте значение для соответствующего ключа рейтинга на 1
+          ratingCountMap.set(rating, ratingCountMap.get(rating) + 1);
+        });
+      
+
+        chartData = [ ['Оценка', 'Количество']]
+        ratingCountMap.forEach((  value, key) => {
+          chartData.push([key.toString() , value]);
+        });
+        console.log(chartData)
+        setMap(chartData)
+
        setTeachers(data);  
 
       //Promise.all([
@@ -204,6 +234,22 @@ export const TeacherPage = () => {
     </div>
   }
 
+  const histogramData = [
+    ['Оценка', 'Количество'],
+    ['1', 1],
+    ['2', 0],
+    ['3', 0],
+    ['4', 0],
+    ['5', 0],
+    ['6', 1],
+    ['7', 0],
+    ['8', 0],
+    ['9', 0],
+    ['10', 2],
+  ];
+
+  console.log(histogramData)
+
   return (
     <div className='singleteachercontainer'>
 
@@ -238,6 +284,28 @@ export const TeacherPage = () => {
             <h3>{teacher.name}</h3>
             {rating}
             {purposes}
+            <div>
+
+            </div>
+            <Chart
+            //style={{width: "100px"}}
+         width={300}
+         height={200}
+        chartType="BarChart" // Используем тип графика ColumnChart для гистограммы
+        loader={<div>Loading Chart</div>}
+        data={map}
+        options={{
+          title: 'Распределение оценок',
+          legend: { position: 'none' },
+         
+          bars: 'horizontal',
+          backgroundColor: 'transparent', // Убираем фон графика
+          colors: ['rgb(247, 217, 24)'], // Задаем желтый цвет полосок
+          bar: { groupWidth: '80%' }, // Устанавливаем ширину полосок
+        }}
+        
+      />
+           
           </div>
 
         </div>
